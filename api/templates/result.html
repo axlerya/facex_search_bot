@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ваши фотографии</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+    <h1>Ваши фотографии</h1>
+    <div class="photo-gallery">
+        {% for url in photo_urls %}
+            <div><img src="{{ url }}" alt="Photo"></div>
+        {% endfor %}
+    </div>
+</body>
+</html>

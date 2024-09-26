@@ -1,0 +1,26 @@
+FROM python:3.10-slim
+
+# Устанавливаем зависимости системы
+RUN apt-get update && apt-get install -y build-essential
+
+# Создаем директорию для приложения
+WORKDIR /app
+
+# Копируем файл с зависимостями
+COPY requirements.web.txt /app/requirements.web.txt
+
+# Устанавливаем зависимости
+RUN pip install --no-cache-dir -r requirements.web.txt
+
+# Копируем весь проект в контейнер
+COPY . /app
+
+# Открываем порт для сервера
+EXPOSE 8012
+
+# Указываем путь для поиска Python-модулей
+ENV PYTHONPATH="/app"
+
+# Запускаем приложение FastAPI
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8012"]
+
